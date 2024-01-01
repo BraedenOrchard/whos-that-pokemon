@@ -7,7 +7,7 @@ export const fetchList = async (): Promise<IPokemon[]> => {
   const pokemonArray: IPokemon[] = data.results.map((pokemon: {name: string}, index: number) => ({
     name: pokemon.name,
     id: index + 1,
-    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${index + 1}.svg`,
+    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
   }));
 
   return pokemonArray;

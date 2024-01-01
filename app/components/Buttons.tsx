@@ -10,7 +10,7 @@ export const PrimaryButton: React.FC<IButton> = ({text, onClick}) => {
   )
 }
 
-export const OptionButton: React.FC<IButton> = ({id, text, buttonState, onClick}) => {
+export const OptionButton: React.FC<IButton> = ({id, text, onClick}) => {
   return(
     <button id={''+id} className={'button'} onClick={() => onClick()}>{text}</button>
   )

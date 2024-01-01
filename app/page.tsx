@@ -1,4 +1,5 @@
 'use client'
+import { ReactSVG } from 'react-svg'
 import { fetchList } from "./lib/pokeapi";
 import { IPokemon } from "./interfaces/IPokemon";
 import React, { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ const Home: React.FC = () =>{
   const [selectedOptions, setSelectedOptions] = useState<IPokemon[]>([]);
   const [correctOption, setCorrectOption] = useState<IPokemon | null>(null);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
-  const [winState, setWinState] = useState<boolean | null>(null); //Change this to be a bool
+  const [winState, setWinState] = useState<boolean | null>(null);
   const [visible, setVisible] = useState<boolean>(false)
 
   useEffect(() => {
@@ -53,23 +54,21 @@ const Home: React.FC = () =>{
 
   const handleGameStart = () => {
     setIsGameStarted(true);
-    setWinState(null);
+    setWinState(false);
     selectGameChoices();
   }
 
   return(
     <main className="flex items-center justify-center h-screen">
       {
-        isGameStarted ?         
+        isGameStarted ?
         <>
-          {/* seems to set black to white, see how to fix */}
-          <img width={250} height={250} src={correctOption?.image} className={visible ? 'visible' : 'blank'} />
+          <img width={250} height={250} src={correctOption?.image} className={visible ? 'visible' : 'blank'} /> 
           {
             selectedOptions.map((p) => (
               <OptionButton 
                 key={p.id}
                 id={p.id}
-                // buttonState={winState}
                 text={p.name.toUpperCase()} 
                 onClick={ () => checkSelectedOption(p.id) } />
             ))

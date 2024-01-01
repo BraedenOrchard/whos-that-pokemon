@@ -17,10 +17,10 @@
 }
 
 .blank{
-  filter: brightness(0);
+  filter: brightness(0) ;
 }
 
 .visible{
   filter: brightness(1);
-  transition: filter 5s ease-in-out;
+  transition: filter 1s ease-in-out;
 }
