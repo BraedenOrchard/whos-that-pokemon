@@ -81,16 +81,12 @@ const Home: React.FC = () => {
   }, [winState, playerSelection, visible])
 
   const handleStreak = () => {
-    console.log("aqsdf");
     if (winState === true) {
-      console.log('1');
       setStreak((prevStreak) => prevStreak + 1);
     } else if (winState === false) {
-      console.log('2');
       setStreak(0);
     } else if (playerSelection === null && visible) {
-      console.log("3");
-      setStreak(0); // Set streak to 0 when player doesn't select any option
+      setStreak(0); 
     }
   };
   
@@ -140,7 +136,7 @@ const Home: React.FC = () => {
       setIsGameRunning(true);
       setVisible(false);
       setPlayerSelection(null)
-    }, 3500);
+    }, 3000);
   };
 
   return (
