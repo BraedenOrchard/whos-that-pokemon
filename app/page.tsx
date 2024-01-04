@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PrimaryButton, OptionButton } from "./components/Buttons";
 import { randomIndex } from "./lib/game";
 import CountdownTimer from "./components/CountdownTimer";
@@ -77,26 +77,23 @@ const Home: React.FC = () => {
   }, [isGameRunning, correctOption, playerSelection]);
 
   useEffect(() => {
-    if(!isGameRunning && correctOption){
-      handleStreak();
-    }
-  }, [winState, playerSelection, correctOption, isGameRunning])
+    handleStreak();
+  }, [winState, playerSelection, visible])
 
   const handleStreak = () => {
-    console.log("aqsdf")
-    if(winState === true){
-      console.log('1')
-      setStreak((prevStreak) => prevStreak + 1) 
+    console.log("aqsdf");
+    if (winState === true) {
+      console.log('1');
+      setStreak((prevStreak) => prevStreak + 1);
+    } else if (winState === false) {
+      console.log('2');
+      setStreak(0);
+    } else if (playerSelection === null && visible) {
+      console.log("3");
+      setStreak(0); // Set streak to 0 when player doesn't select any option
     }
-    else if(winState === false){ 
-      console.log('2')
-      setStreak(0) 
-    }
-    else if(playerSelection === null){
-      console.log("3")
-    }
-  }
-
+  };
+  
   const selectGameChoices = () => {
     const shuffledList = pokemon.sort(() => Math.random() - 0.5);
     const selection = shuffledList.slice(0, 4);
@@ -117,7 +114,6 @@ const Home: React.FC = () => {
   };
 
   const handleRoundFinish = (selectedID?: number) => {
-    setIsGameRunning(false);
     setVisible(true);
     
     if (correctOption) {
@@ -129,6 +125,7 @@ const Home: React.FC = () => {
         ? setWinState(true)
         : setWinState(false)
     }
+    setIsGameRunning(false);
   };
 
   const handleGameStart = () => {
@@ -137,12 +134,12 @@ const Home: React.FC = () => {
     setWinState(null);
     selectGameChoices();
     setIsGameStarted(true);
-    setPlayerSelection(null)
 
     setTimeout(() => {
       setIsCountdown(false);
       setIsGameRunning(true);
       setVisible(false);
+      setPlayerSelection(null)
     }, 3500);
   };
 
