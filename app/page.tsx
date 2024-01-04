@@ -69,10 +69,26 @@ const Home: React.FC = () => {
   }, [isGameRunning, handleSelectedOption]);
 
   useEffect(() => {
-    if (isGameRunning && correctOption) {
+    if (isCountdown) {
+      // Countdown is in progress, wait for it to finish
       setTimeout(() => {
+        setIsCountdown(false);
+        setIsGameRunning(true);
+        setVisible(false);
+        setPlayerSelection(null);
+      }, 3000);
+    }
+  }, [isCountdown]);
+
+  useEffect(() => {
+    if (isGameRunning) {
+      // Game is running, set the timeout for handling the round finish
+      const timeoutId = setTimeout(() => {
         handleRoundFinish();
       }, 5000);
+
+      // Clear the timeout if the component unmounts or game state changes
+      return () => clearTimeout(timeoutId);
     }
   }, [isGameRunning, correctOption, playerSelection]);
 
@@ -130,13 +146,6 @@ const Home: React.FC = () => {
     setWinState(null);
     selectGameChoices();
     setIsGameStarted(true);
-
-    setTimeout(() => {
-      setIsCountdown(false);
-      setIsGameRunning(true);
-      setVisible(false);
-      setPlayerSelection(null)
-    }, 3000);
   };
 
   return (
