@@ -7,3 +7,8 @@ A game built with NextJS that emulates the *Who's that Pokemon* TV game. The gam
 How high can you get your streak?
 
 Gotta guess them all!
+
+Attributions:
+<a href="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons">Pokemon favicon created by Darius Dan - Flaticon</a>
+<a href="https://pokeapi.co">Uses Pokemon api to provide the data</a>
+<a href="https://github.com/PokeAPI/sprites/">Pokemon images hosted here</a>
