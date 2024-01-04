@@ -18,8 +18,9 @@ const Home: React.FC = () => {
   const [roundCounter, setRoundCounter] = useState<number>(0);
   const [streak, setStreak] = useState<number>(0);
   const [playerSelection, setPlayerSelection] = useState<number | null>(null);
+  const [buttonStyles, setButtonStyles] = useState<{ [key: number]: string }>({});
 
-  const handleSelectedOption = (key: number) => {
+  const handleOptionClick  = (key: number) => {
     setIsGameRunning(false);
     if (isGameRunning) {
       checkButtons();
@@ -66,7 +67,7 @@ const Home: React.FC = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isGameRunning, handleSelectedOption]);
+  }, [isGameRunning, handleOptionClick ]);
 
   useEffect(() => {
     if (isCountdown) {
@@ -112,17 +113,27 @@ const Home: React.FC = () => {
     const winnerIndex = randomIndex();
     setSelectedOptions(selection);
     setCorrectOption(selection[winnerIndex]);
+  
+    // Initialize button styles
+    const initialButtonStyles: { [key: number]: string } = {};
+    selection.forEach((pokemon) => {
+      initialButtonStyles[pokemon.id] = 'button';
+    });
+    setButtonStyles(initialButtonStyles);
   };
 
   const checkButtons = () => {
-    for (let x in selectedOptions) {
-      const currentButton = document.getElementById(`${selectedOptions[x].id}`);
-      if (selectedOptions[x].id === correctOption?.id) {
-        currentButton?.classList.add("winner");
+    const updatedStyles: { [key: number]: string } = {};
+  
+    for (const pokemon of selectedOptions) {
+      if (pokemon.id === correctOption?.id) {
+        updatedStyles[pokemon.id] = 'winner';
       } else {
-        currentButton?.classList.add("loser");
+        updatedStyles[pokemon.id] = 'loser';
       }
     }
+  
+    setButtonStyles(updatedStyles);
   };
 
   const handleRoundFinish = (selectedID?: number) => {
@@ -154,7 +165,8 @@ const Home: React.FC = () => {
         key={p.id}
         id={p.id}
         text={p.name.toUpperCase()}
-        onClick={() => handleSelectedOption(p.id)}
+        onClick={() => handleOptionClick(p.id)}
+        className={buttonStyles[p.id]}
       />
     ));
   };

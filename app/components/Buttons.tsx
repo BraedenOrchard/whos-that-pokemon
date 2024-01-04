@@ -1,7 +1,7 @@
 import React from "react"
-import { IButton } from "../interfaces/IButton"
+import { IPrimaryButton, IOptionButtonProps } from "../interfaces/IButton"
 
-export const PrimaryButton: React.FC<IButton> = ({text, onClick}) => {
+export const PrimaryButton: React.FC<IPrimaryButton> = ({text, onClick}) => {
   return(
     <button 
       className="flex bg-green-500 p-2 rounded button"
@@ -10,8 +10,10 @@ export const PrimaryButton: React.FC<IButton> = ({text, onClick}) => {
   )
 }
 
-export const OptionButton: React.FC<IButton> = ({id, text, onClick}) => {
-  return(
-    <button id={''+id} className={'button'} onClick={() => onClick()}>{text}</button>
-  )
-}
+export const OptionButton: React.FC<IOptionButtonProps> = ({ id, text, onClick, className }) => {
+  return (
+    <button id={String(id)} onClick={onClick} className={`button ${className}`}>
+      {text}
+    </button>
+  );
+};
