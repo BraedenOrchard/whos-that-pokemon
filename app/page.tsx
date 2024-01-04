@@ -148,6 +148,17 @@ const Home: React.FC = () => {
     setIsGameStarted(true);
   };
 
+  const renderOptionButtons = () => {
+    return selectedOptions.map((p) => (
+      <OptionButton
+        key={p.id}
+        id={p.id}
+        text={p.name.toUpperCase()}
+        onClick={() => handleSelectedOption(p.id)}
+      />
+    ));
+  };
+
   return (
     <main className="flex flex-col items-center justify-center h-screen">
       {isCountdown ? (
@@ -160,16 +171,7 @@ const Home: React.FC = () => {
             src={correctOption?.image}
             className={visible ? "visible" : "blank"}
           />
-          <div className="flex-row">
-            {selectedOptions.map((p) => (
-              <OptionButton
-                key={p.id}
-                id={p.id}
-                text={p.name.toUpperCase()}
-                onClick={() => handleRoundFinish(p.id)}
-              />
-            ))}
-          </div>
+          <div className="flex-row">{renderOptionButtons()}</div>
           <span>Round {roundCounter}</span>
           <span>Streak: {streak}</span>
           {isGameRunning ? (
