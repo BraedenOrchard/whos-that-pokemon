@@ -117,7 +117,7 @@ const Home: React.FC = () => {
     // Initialize button styles
     const initialButtonStyles: { [key: number]: string } = {};
     selection.forEach((pokemon) => {
-      initialButtonStyles[pokemon.id] = 'button';
+      initialButtonStyles[pokemon.id] = '';
     });
     setButtonStyles(initialButtonStyles);
   };
