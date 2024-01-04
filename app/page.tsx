@@ -20,19 +20,6 @@ const Home: React.FC = () => {
   const [playerSelection, setPlayerSelection] = useState<number | null>(null);
   const [buttonStyles, setButtonStyles] = useState<{ [key: number]: string }>({});
 
-  const handleOptionClick  = (key: number) => {
-    setIsGameRunning(false);
-    if (isGameRunning) {
-      checkButtons();
-      if (correctOption && key === correctOption.id) {
-        setWinState(true);
-      } else {
-        setWinState(false);
-      }
-      setVisible(true);
-    }
-  };
-
   useEffect(() => {
     const fetchListData = async () => {
       try {
@@ -67,7 +54,7 @@ const Home: React.FC = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isGameRunning, handleOptionClick ]);
+  }, [isGameRunning ]);
 
   useEffect(() => {
     if (isCountdown) {
@@ -163,7 +150,7 @@ const Home: React.FC = () => {
         key={p.id}
         id={p.id}
         text={p.name.toUpperCase()}
-        onClick={() => handleOptionClick(p.id)}
+        onClick={() => handleRoundFinish(p.id)}
         className={buttonStyles[p.id]}
       />
     ));
