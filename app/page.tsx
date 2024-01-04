@@ -143,10 +143,8 @@ const Home: React.FC = () => {
       checkButtons();
     }
     if (selectedID) {
-      setPlayerSelection(selectedID)
-      correctOption && selectedID === correctOption.id
-        ? setWinState(true)
-        : setWinState(false)
+      setPlayerSelection(selectedID);
+      setWinState(selectedID === correctOption?.id);
     }
     setIsGameRunning(false);
   };
