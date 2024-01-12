@@ -19,7 +19,6 @@ const Game: React.FC = () => {
   const [streak, setStreak] = useState<number>(0);
   const [playerSelection, setPlayerSelection] = useState<number | null>(null);
   const [buttonStyles, setButtonStyles] = useState<{ [key: number]: string }>({});
-  const [score, setScore] = useState<number>(0);
 
   useEffect(() => {
     const fetchListData = async () => {
@@ -91,16 +90,6 @@ const Game: React.FC = () => {
       setStreak(0); 
     }
   }, [winState, playerSelection, visible])
-
-  const handleStreak = () => {
-    if (winState === true) {
-      setStreak((prevStreak) => prevStreak + 1);
-    } else if (winState === false) {
-      setStreak(0);
-    } else if (playerSelection === null && visible) {
-      setStreak(0); 
-    }
-  };
   
   const selectGameChoices = () => {
     const shuffledList = pokemon.sort(() => Math.random() - 0.5);
