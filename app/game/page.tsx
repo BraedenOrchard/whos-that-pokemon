@@ -19,7 +19,7 @@ const Game: React.FC = () => {
   const [streak, setStreak] = useState<number>(0);
   const [playerSelection, setPlayerSelection] = useState<number | null>(null);
   const [buttonStyles, setButtonStyles] = useState<{ [key: number]: string }>({});
-
+  
   useEffect(() => {
     const fetchListData = async () => {
       try {
